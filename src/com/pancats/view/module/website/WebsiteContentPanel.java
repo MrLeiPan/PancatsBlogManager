@@ -2,8 +2,12 @@ package com.pancats.view.module.website;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.sql.SQLException;
+
 import javax.swing.JPanel;
 
+import com.pancats.dao.IWebsite;
+import com.pancats.dao.factory.DaoFactory;
 import com.pancats.view.component.utlis.ContentMenu;
 import com.pancats.view.component.utlis.ContentOperate;
 
@@ -21,7 +25,7 @@ public class WebsiteContentPanel extends JPanel {
 		borderLayot=new BorderLayout();
 		setLayout(borderLayot);
 		initMenu();//初始化菜单栏
-		//initOperate();//初始化控制台面板
+		initOperate();//初始化控制台面板
 	}
 	
 	
@@ -39,7 +43,16 @@ public class WebsiteContentPanel extends JPanel {
 	 * 初始化控制台面板
 	 */
 	private void initOperate() {
+		Object[] columnNames = {"编号","名称","属性"};
 		websiteOperate = new WebsiteOperate(new Dimension(0, 0));
+		websiteOperate.setTitle("网站管理");
+		websiteOperate.setColumnNames(columnNames);
+		IWebsite wdao = DaoFactory.createWebsite();
+		try {
+			websiteOperate.initData(wdao.findAll());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		add(BorderLayout.CENTER, websiteOperate.getOperate());
 	}
 		

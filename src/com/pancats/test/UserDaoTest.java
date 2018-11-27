@@ -10,7 +10,7 @@ import com.pancats.dao.factory.DaoFactory;
 import com.pancats.domain.User;
 
 public class UserDaoTest {
-	IUserDao dao = DaoFactory.createIUserDao();
+	IUserDao dao = DaoFactory.createUserDao();
 	
 	
 	@Test

@@ -2,7 +2,14 @@ package com.pancats.view.module.log;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.sql.SQLException;
+
 import javax.swing.JPanel;
+
+import org.junit.Test;
+
+import com.pancats.dao.ILog;
+import com.pancats.dao.factory.DaoFactory;
 import com.pancats.view.component.utlis.ContentMenu;
 
 /**
@@ -19,7 +26,7 @@ public class LogContentPanel extends JPanel {
 		borderLayot=new BorderLayout();
 		setLayout(borderLayot);
 		initMenu();//初始化菜单栏
-		//initOperate();//初始化控制台面板
+		initOperate();//初始化控制台面板
 	}
 	
 	
@@ -36,8 +43,18 @@ public class LogContentPanel extends JPanel {
 	/**
 	 * 初始化控制台面板
 	 */
-	private void initOperate() {
+	@Test
+	public void initOperate() {
+		Object[] columnNames = {"编号","事件","发生日期","触发者","日志类型"};
 		logOperate = new LogOperate(new Dimension(0, 0));
+		logOperate.setTitle("日志管理");
+		logOperate.setColumnNames(columnNames);
+		ILog ldao = DaoFactory.createLog();
+		try {
+			logOperate.initData(ldao.findAll());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		add(BorderLayout.CENTER, logOperate.getOperate());
 	}
 		

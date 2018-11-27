@@ -1,7 +1,6 @@
 package com.pancats.view.components;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,15 +17,14 @@ public class ScrollBarUIBar extends BasicScrollBarUI {
 	private Color trackColor= new Color(133,133,133);
 	
 	/**
-	 * 重绘滚动条的把手
+	 * �����ְ�
 	 */
 	
 	@Override
 	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
 		Graphics2D g2 = (Graphics2D)g;
 		g.translate(thumbBounds.x, thumbBounds.y);
-		g.setColor(thumbColor);//设置把手颜色
-		//消除锯齿
+		g.setColor(thumbColor);
 		RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.addRenderingHints(rh);
 		//g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.9F));
@@ -34,7 +32,7 @@ public class ScrollBarUIBar extends BasicScrollBarUI {
 	}
 
 	/**
-	 * 重绘滚动条的滑道
+	 * ���ƹ��
 	 */
 	@Override
 	protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
@@ -61,17 +59,13 @@ public class ScrollBarUIBar extends BasicScrollBarUI {
 		//super.paintTrack(g, c, trackBounds);
 	}
 	
-	/**
-	 * 创建上方的按�?
-	 */
+
 	@Override
 	protected JButton createIncreaseButton(int orientation) {
 		return  setButton();
 	}
 	
-	/**
-	 * 创建下方的按�?
-	 */
+
 	@Override
 	protected JButton createDecreaseButton(int orientation) {
 		return  setButton();

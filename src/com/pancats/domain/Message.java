@@ -11,7 +11,7 @@ import java.util.Date;
  * @author Ð¡·è×Ó
  * 
  */
-public class Leave {
+public class Message {
 	private Integer md=null;
 	private String ip=null;
 	private String mail=null;

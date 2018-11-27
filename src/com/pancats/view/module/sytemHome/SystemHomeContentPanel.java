@@ -12,7 +12,6 @@ import com.pancats.view.component.utlis.ContentMenu;
 public class SystemHomeContentPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private BorderLayout borderLayot=null;
-	private ContentMenu systemHomegMenu=null;
 	private SystemHomeContainer systemHomeContainer=null;
 	public SystemHomeContentPanel() {
 		borderLayot=new BorderLayout();

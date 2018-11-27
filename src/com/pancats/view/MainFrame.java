@@ -6,8 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.pancats.view.module.blog.BlogContentPanel;
-import com.pancats.view.module.leave.LeaveContentPanel;
 import com.pancats.view.module.log.LogContentPanel;
+import com.pancats.view.module.message.MessageContentPanel;
 import com.pancats.view.module.site.SiteContentPanel;
 import com.pancats.view.module.sytemHome.SystemHomeContentPanel;
 import com.pancats.view.module.user.UserContentPanel;
@@ -18,8 +18,10 @@ public class MainFrame extends JFrame {
 	private ContentPanel contentPanel=null;//内容面板
 	private TitlePanel titleArea=null;//标题栏区域
 	private StatusPanel statusArea=null;//状态栏区域
-	public MainFrame() {
+	private String username=null;
+	public MainFrame(String name) {
 		super("Pancats后台管理系统");
+		this.username=name;
 		setSize(new Dimension(1500, 1000));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -31,7 +33,7 @@ public class MainFrame extends JFrame {
 		titleArea =new TitlePanel(this,new Dimension(0, 50));
 		getContentPane().add(BorderLayout.NORTH,titleArea);
 		
-		statusArea = new StatusPanel();
+		statusArea = new StatusPanel(username);
 		getContentPane().add(BorderLayout.SOUTH,statusArea);
 		
 		contentPanel=new ContentPanel(setJPanels());//添加主内容面板
@@ -52,14 +54,10 @@ public class MainFrame extends JFrame {
 		panels[1]=new BlogContentPanel();
 		panels[2]=new UserContentPanel();
 		panels[3]=new LogContentPanel();
-		panels[4]=new LeaveContentPanel();
+		panels[4]=new MessageContentPanel();
 		panels[5]=new WebsiteContentPanel();
 		panels[6]=new SiteContentPanel();
 		return panels;
 	}
 	
-	public static void main(String[] args) {
-		MainFrame m = new MainFrame();
-		m.setVisible(true);
-	}
 }

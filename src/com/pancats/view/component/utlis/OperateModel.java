@@ -22,9 +22,8 @@ public class OperateModel implements ContentOperate {
 	private JPanel operatePanel=null;
 	private String name=null;
 	private PTable table = null;
-	private JPanel OperateArea=null;
+	private JPanel displayData=null;
 	private final Color BC1=new Color(246, 246, 246);
-	private TableData tdata=null;
 	private Font font = new Font("微软雅黑", Font.BOLD, 16);
 	
 	public OperateModel(Dimension dimension) {
@@ -39,14 +38,25 @@ public class OperateModel implements ContentOperate {
 		operatePanel.setBackground(BC1);
 		operatePanel.setPreferredSize(dimension);
 		operatePanel.setBorder(BorderFactory.createMatteBorder(25, 0, 25, 25,BC1));
-		JLabel title = getTitleArea();
-		title.setPreferredSize(new Dimension(operatePanel.getWidth(), 40));
-		operatePanel.add(BorderLayout.NORTH,title);
-		JPanel operate = getOperateArea();
-		operatePanel.add(operate);
+		operatePanel.add(BorderLayout.NORTH, getTitleArea());
+		table.setRowHeight(35);
+		table.setHeadFont(font);
+		table.setDefaultRenderer(Object.class,new CellRenderer());
+		operatePanel.add(table.getJScrollPane());//给表格创建滚动条并将返回的带有滚动条的表格添加到饥饿层面板中
+		operatePanel.add(BorderLayout.SOUTH,getDisplayDataArea());
 		return operatePanel;
 	}
-
+	
+	private JPanel getDisplayDataArea() {
+		displayData = new JPanel();
+		displayData.setBackground(Color.WHITE);
+		displayData.setPreferredSize(new Dimension(0, 300));
+		displayData.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GRAY));
+		JLabel hint = new JLabel("数据详情区域");
+		hint.setFont(new Font("微软雅黑",Font.BOLD,18));
+		displayData.add(hint);
+		return displayData;
+	}
 	@Override
 	public void setTitle(String name) {
 		this.name=name;
@@ -60,6 +70,7 @@ public class OperateModel implements ContentOperate {
 	
 	private JLabel getTitleArea() {
 		titleArea=new JLabel(name);
+		titleArea.setPreferredSize(new Dimension(operatePanel.getWidth(), 40));
 		titleArea.setHorizontalAlignment(SwingConstants.CENTER);
 		titleArea.setFont(new Font("微软雅黑",Font.BOLD,16));
 		titleArea.setBackground(Color.WHITE);
@@ -69,15 +80,7 @@ public class OperateModel implements ContentOperate {
 		return titleArea;
 	}
 	
-	
-	private JPanel getOperateArea() {
-		table.setRowHeight(35);
-		table.setHeadFont(font);
-		OperateArea = new JPanel();
-		BoxLayout box = new BoxLayout(OperateArea, BoxLayout.Y_AXIS);//盒子布局，自上而下排列
-		OperateArea.setLayout(box);
-		OperateArea.add(table.getJScrollPane());//给表格创建滚动条并将返回的带有滚动条的表格添加到饥饿层面板中
-		return OperateArea;
+	public PTable getPTable() {
+		return this.table;
 	}
-
 }

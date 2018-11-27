@@ -54,9 +54,13 @@ public final class TableDatas<T> {
 	 * list集合转换二维数据
 	 */
 	private void transform() {
-		datas = new Object[datalist.size()][];
-		for (int v = 0; v < datalist.size(); v++) {
-			datas[v] = getValuesObject(datalist.get(v));
+		if(datalist.isEmpty()) {
+			datas=null;
+		}else {
+			datas = new Object[datalist.size()][];
+			for (int v = 0; v < datalist.size(); v++) {
+				datas[v] = getValuesObject(datalist.get(v));
+			}
 		}
 	}
 	/**

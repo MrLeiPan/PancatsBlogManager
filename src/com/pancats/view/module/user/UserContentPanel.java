@@ -38,7 +38,7 @@ public class UserContentPanel extends JPanel {
 	 * 初始化控制台面板
 	 */
 	private void initOperate() {
-		IUserDao udao = DaoFactory.createIUserDao();
+		IUserDao udao = DaoFactory.createUserDao();
 		Object[] columnNames= {"用户id","用户名","密码","邮箱"};
 		userOperate = new UserOperate(new Dimension(0,0));
 		userOperate.setTitle("用户管理");
@@ -48,6 +48,7 @@ public class UserContentPanel extends JPanel {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		userOperate.registerListener();
 		add(BorderLayout.CENTER, userOperate.getOperate());
 	}
 }

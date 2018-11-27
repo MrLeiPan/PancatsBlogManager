@@ -33,15 +33,15 @@ public class DefaultTableData implements TableData {
 	public Class<?>[] getColumnTypes() {
 		if(this.colTypes!=null) return colTypes; 
 		Class<?>[] types=new Class[getColumnCount()];
-		Object[] firstRowData = getFirstRowData();
 		for(int i=0;i<types.length;i++) {
-			types[i]=firstRowData[i].getClass();
+			types[i]=Object.class;
 		}
 		return types;
 	}
 
 	@Override
 	public int getDataCount() {
+		if(datas==null) return 0;
 		return datas.length;
 	}
 
@@ -55,6 +55,9 @@ public class DefaultTableData implements TableData {
 	 * @return
 	 */
 	public Object[] getFirstRowData() {
+		if(datas==null) {
+			throw new RuntimeException("Data is Null");
+		}
 		Object[] firstRowdata=new Object[getColumnCount()];
 		for(int i=0;i<firstRowdata.length;i++) {
 			firstRowdata[i]=datas[0][i];
@@ -69,26 +72,4 @@ public class DefaultTableData implements TableData {
 		this.colTypes=colTypes;
 	}
 	
-	public static void main(String[] args) {
-		Object[] data1 = { "200913420125", "SUMMER", new Boolean(true),
-				new Integer(20), "1", "NULL" };
-		Object[] data2 = { "200913420124", "WULEI", new Boolean(true),
-				new Integer(20), "2", "NULL" };
-		Object[] data3 = { "200913420125", "BOOK", new Boolean(false),
-				new Integer(20), "3", "NULL" };
-		Object[] data4 = { "200913420125", "CUP", new Boolean(true),
-				new Integer(20), "4", "NULL" };
-		Object[] data5 = { "200913420125", "MOUSE", new Boolean(true),
-				new Integer(20), "5", "NULL" };
-		Class[] typeArray = { Object.class, Object.class, Boolean.class,
-				Integer.class, JComboBox.class, Object.class };
-		Object[][] data = { data1, data2, data3, data4, data5 };
-		String[] head = { "ID", "NAME", "SEX(boy)", "AGE", "ADDRESS", "DEMO" };
-		DefaultTableData dtd = new DefaultTableData(head, data);
-		dtd.setColumnTypes(typeArray);
-		Class<?>[] columnTypes = dtd.getColumnTypes();
-		for (Class<?> class1 : columnTypes) {
-			System.out.println(class1);
-		}
-	}
 }

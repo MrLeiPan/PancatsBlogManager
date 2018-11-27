@@ -16,13 +16,13 @@ public class LoginListener implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		IUserDao udao = DaoFactory.createIUserDao();
+		IUserDao udao = DaoFactory.createUserDao();
 		try {
 			if(udao.findByNameByPassword(login.getUserName(),login.getUserPassword())==null) {
 				JOptionPane.showMessageDialog(null, "µÇÂ½Ê§°Ü");
 			}else {
 				login.dispose();
-				MainFrame mainframe = new MainFrame();
+				MainFrame mainframe = new MainFrame(login.getUserName());
 				mainframe.setVisible(true);
 			}
 		} catch (SQLException e1) {

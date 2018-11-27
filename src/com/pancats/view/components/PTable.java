@@ -9,10 +9,11 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
+
+import com.pancats.view.event.PTableMouseListener;
 public class PTable extends JTable {
 	private static final long serialVersionUID = 1L;
 	private JScrollPane jsp = null;
-
 	public PTable() {
 	}
 	public PTable(int numRows, int numColumns) {
@@ -49,6 +50,7 @@ public class PTable extends JTable {
 		this.jsp.getVerticalScrollBar().setUI(new ScrollBarUIBar());
 		return jsp;
 	}
+	
 	/**
 	 * 设置单元格样式
 	 * @param columnClass
@@ -58,5 +60,9 @@ public class PTable extends JTable {
 	public void setCellEditStyle(Class<?> columnClass,TableCellEditor editor,TableCellRenderer renderer) {
 		this.setDefaultEditor(columnClass, editor);
 		this.setDefaultRenderer(columnClass, renderer);
+	}
+	
+	public void addPopupMenu(BasicPopupMenu popupMenu) {
+		this.addMouseListener(new PTableMouseListener(popupMenu));
 	}
 }

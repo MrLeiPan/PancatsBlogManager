@@ -1,4 +1,4 @@
-package com.pancats.view.module.leave;
+package com.pancats.view.module.message;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,11 +16,11 @@ import com.pancats.view.components.LabelFactory;
  * @author Ð¡·è×Ó
  *
  */
-public class LeaveMenu implements ContentMenu {
+public class MessageMenu implements ContentMenu {
 	private String[] menuItem=null;
 	private JPanel jPanel=null;
 	private Dimension dimension=null;
-	public LeaveMenu(Dimension dimension) {
+	public MessageMenu(Dimension dimension) {
 		this.dimension=dimension;
 	}
 	@Override

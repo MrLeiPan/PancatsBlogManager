@@ -50,14 +50,14 @@ public class StatusBar extends JLabel  {
 	public void initStatusBar() {
 		JLabel first=new JLabel();
 		JLabel last=new JLabel();
-		version = new JLabel("当前版本:"+sVersion);
-		username = new JLabel("当前用户:"+sUsername);
-		identity = new JLabel("身份:"+sIdentity);
-		systemtime = new JLabel("系统时间:"+sSystemname);
-		version.setBounds(20,0,100, 35);
-		username.setBounds(0, 0, 100,35);
-		identity.setBounds(130, 0, 100, 35);
-		systemtime.setBounds(260, 0, 100,35);
+		version = new JLabel("当前版本: "+sVersion);
+		username = new JLabel("当前用户: "+sUsername);
+		identity = new JLabel("身份: "+sIdentity);
+		systemtime = new JLabel("系统时间: "+sSystemname);
+		version.setBounds(20,0,200, 35);
+		username.setBounds(0, 0, 200,35);
+		identity.setBounds(130, 0, 200, 35);
+		systemtime.setBounds(280, 0, 200,35);
 		first.add(version);
 		last.add(username);
 		last.add(identity);

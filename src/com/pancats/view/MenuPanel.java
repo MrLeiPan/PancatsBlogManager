@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import com.pancats.view.component.utlis.MenuItems;
 import com.pancats.view.component.utlis.MenuItemsImpl;
+import com.pancats.view.components.RButton;
 import com.pancats.view.event.BlogListener;
 import com.pancats.view.event.MenuChageListener;
 import com.pancats.view.event.WebsiteListener;
@@ -41,23 +42,27 @@ public class MenuPanel extends JPanel {
 		webItem();
 		registerListener();
 	}
-	
+	/**
+	 * 系统设置
+	 */
 	private void menu() {
 		mitem = new MenuItemsImpl();
 		JButton menu = mitem.menu();
+		blist.add(menu);
 		menu.setBounds(30, 30, 235, 45);
 		menu.setFont(FONT);
 		add(menu);
 	}
 	
 	/**
-	 * 
+	 * 系统主页
 	 */
 	
 	private void systemHomeItem() {
 		JButton systemHome = mitem.systemHomeItem();
 		blist.add(systemHome);
 		systemHome.setBounds(0, 100, 300, 45);
+		((RButton)systemHome).setBorderStyle(Color.BLACK, Color.WHITE);
 		systemHome.setFont(FONT);
 		add(systemHome);
 	}

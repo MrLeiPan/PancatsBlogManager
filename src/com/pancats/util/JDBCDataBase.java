@@ -12,7 +12,7 @@ import java.sql.SQLException;
  */
 public class JDBCDataBase {
 	private String driverUrl = "com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost:3306/PancatsBlogManager?serverTimezone=UTC";
+	private String url = "jdbc:mysql://localhost:3306/PancatsBlogManager?serverTimezone=UTC&useSSL=false";
 	private String user = "root";
 	private String password = "123456";
 	private Connection conn = null;
