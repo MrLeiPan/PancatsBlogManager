@@ -1,0 +1,1 @@
+serverTimezone=UTC&characterEncoding=utf-8 
