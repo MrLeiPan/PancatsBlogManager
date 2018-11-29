@@ -1,10 +1,14 @@
-package com.pancats.view;
+package com.pancats.view.login;
 
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.File;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -18,12 +22,12 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import com.pancats.view.event.LoginListener;
-import com.pancats.view.event.LoginFocusListener;
+import com.pancats.view.components.RButton;
 /**
- * JFrameÖĞµÄ²ã´Î·Ö²¼¼°Ïà¶Ô¹ØÏµÊÇ:
- * ×îµ×²ãÊÇ£ºJRootPane£»
- * µÚ¶ş²ãÊÇ£ºJlayerPane£»
- * ×îÉÏ²ã¾ÍÊÇContentPane,Ò²ÕıÊÇÎÒÃÇ³£ËµµÄÄÚÈİÃæ°å¡£
+ * JFrameä¸­çš„å±‚æ¬¡åˆ†å¸ƒåŠç›¸å¯¹å…³ç³»æ˜¯:
+ * æœ€åº•å±‚æ˜¯ï¼šJRootPaneï¼›
+ * ç¬¬äºŒå±‚æ˜¯ï¼šJlayerPaneï¼›
+ * æœ€ä¸Šå±‚å°±æ˜¯ContentPane,ä¹Ÿæ­£æ˜¯æˆ‘ä»¬å¸¸è¯´çš„å†…å®¹é¢æ¿ã€‚
  * @author Administrator
  *
  */
@@ -34,8 +38,9 @@ public class Login extends JFrame {
 	private JLabel backLabel=null,logoLabel=null;
 	private JTextField tname=null;
 	private JPasswordField tpass=null;
-	private JButton submit=null;
+	private RButton submit=null,register=null;
 	private Border border=null;
+	private Register reg=null;
 	public Login(String title) {
 		super(title);
 		setSize(800,500);
@@ -47,21 +52,61 @@ public class Login extends JFrame {
 		
 	}
 	/**
-	 * ´°Ìå³õÊ¼»¯
+	 * çª—ä½“åˆå§‹åŒ–
 	 */
 	private void initFrame() {
 		setJFranmeBack(new File("../blogManager/images/bg.jpg"));
 		tname = new JTextField();
 		tpass = new JPasswordField();
 		tpass.setEchoChar((char)0);
-		add(getText(tname,"ÓÃ»§Ãû",300,200));
-		add(getText(tpass,"ÃÜ    Âë",300,245));
+		add(getText(tname,"ç”¨æˆ·å",300,200));
+		add(getText(tpass,"å¯†    ç ",300,245));
 		add(addLogo(290, 80));
 		add(submit(300,300));
+		add(register(300, 350));
+		initListener();
 	}
 	
+	private void initListener() {
+		tname.addFocusListener(new FocusListener() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if("".equals(tname.getText())||tname.getText()==null) {
+					tname.setText("ç”¨æˆ·å");
+					tname.setForeground(Color.WHITE);
+				}
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				if("ç”¨æˆ·å".equals(tname.getText())) {
+					tname.setText("");
+					tname.setForeground(Color.BLACK);
+				}
+			}
+		});
+		tpass.addFocusListener(new FocusListener() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if("".equals(tpass.getText())||tpass.getText()==null) {
+					tpass.setEchoChar((char)0);
+					tpass.setText("å¯†    ç ");
+					tpass.setForeground(Color.WHITE);
+				}
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				if("å¯†    ç ".equals(tpass.getText())) {
+					tpass.setEchoChar('âš«');
+					tpass.setText("");
+					tpass.setForeground(Color.BLACK);
+				}
+			}
+		});
+	}
 	/**
-	 * ÉèÖÃ´°Ìå±³¾°
+	 * è®¾ç½®çª—ä½“èƒŒæ™¯
 	 * @param imagepath 
 	 */
 	private void setJFranmeBack(File imagepath) {
@@ -69,18 +114,13 @@ public class Login extends JFrame {
 		backLabel= new JLabel(backimage);
 		this.getLayeredPane().add(backLabel,new Integer(Integer.MIN_VALUE));
 		backLabel.setBounds(0, 0, backimage.getIconWidth(), backimage.getIconHeight());
-		Container pane = this.getContentPane();//»ñÈ¡´°Ìå×îÉÏ²ãµÄContentPane
-		((JPanel)pane).setOpaque(false);//ÈÃ¸Ã²ãÍ¸Ã÷
+		Container pane = this.getContentPane();//è·å–çª—ä½“æœ€ä¸Šå±‚çš„ContentPane
+		((JPanel)pane).setOpaque(false);//è®©è¯¥å±‚é€æ˜
 	}
 	/**
 	 * Logo
 	 */
 	private JLabel addLogo(int x,int y) {
-		/*logo = new ImageIcon(logopath.getAbsolutePath());
-		logoLabel = new JLabel(logo);
-		logoLabel.setSize(350,30);
-		logoLabel.setLocation(200, 400);
-		this.add(logoLabel);*/
 		logoLabel = new JLabel("Pancats");
 		logoLabel.setFont(new Font(null,Font.BOLD+Font.ITALIC,64));
 		logoLabel.setForeground(Color.WHITE);
@@ -97,9 +137,6 @@ public class Login extends JFrame {
 		baselabel.setBorder(getLineBorder());
 		baselabel.setBackground(color);
 		Border border = BorderFactory.createEmptyBorder(0,0,0,0);
-		if("ÃÜ    Âë".equals(content)) 
-			((JPasswordField)text).setEchoChar('*');
-		text.addFocusListener(new LoginFocusListener(text));
 		text.setBackground(color);
 		text.setSize(196,30);
 		text.setLocation(10, 5);
@@ -113,7 +150,7 @@ public class Login extends JFrame {
 	}
 	
 	/**
-	 * ±ß¿ò
+	 * è¾¹æ¡†
 	 * @return
 	 */
 	private Border getLineBorder() {
@@ -122,19 +159,47 @@ public class Login extends JFrame {
 	}
 	
 	private JButton submit(int x,int y) {
-		submit = new JButton("µÇ     Â½");
+		submit = new RButton("ç™»     é™†");
 		submit.setSize(new Dimension(220,40)); 
 		submit.setLocation(x, y);
-		submit.setBackground(new Color(5,140,196));
+		submit.setRadian(0);
+		submit.setGradualPaint(0, 0, Color.RED, 0, 0, new Color(5,140,196));
 		submit.setFont(new Font(null,Font.BOLD,16));
 		submit.setForeground(Color.WHITE);
-		submit.setBorder(BorderFactory.createLineBorder(new Color(5,152,213)));
+		submit.setBorderStyle(new Color(5,140,196), new Color(5,140,196));
 		submit.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		submit.addActionListener(new LoginListener(this));
-		submit.setFocusPainted(false);// ÊÇ·ñ»æÖÆ½¹µã
 		return submit;
 	}
 	
+	
+	private JButton register(int x,int y) {
+		register = new RButton("æ³¨     å†Œ");
+		register.setSize(new Dimension(220,40)); 
+		register.setRadian(0);
+		register.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		register.setFont(new Font(null,Font.BOLD,16));
+		register.setForeground(Color.WHITE);
+		register.setGradualPaint(0, 0, new Color(5,140,196), 0, 0, new Color(5,140,196));
+		register.setBorderStyle(new Color(5,140,196), new Color(5,140,196));
+		register.setLocation(x, y);
+		register.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loadRegister();
+			}
+		});
+		return register;
+	}
+	
+	protected void loadRegister() {
+		if(reg==null) {
+			reg = new Register();
+			reg.setLocation(this.getWidth()-reg.getWidth(), 0);
+			this.add(reg);
+			this.repaint();
+		}
+	}
 	public String getUserPassword() {
 		return this.tpass.getText();
 	}
@@ -145,7 +210,7 @@ public class Login extends JFrame {
 
 	
 	public static void main(String[] args) {
-		Login l = new Login("²©¿ÍµÇÂ½½çÃæ");
+		Login l = new Login("åšå®¢ç™»é™†ç•Œé¢");
 		l.setVisible(true);
 	}
 }

@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import com.pancats.dao.IUserDao;
 import com.pancats.dao.factory.DaoFactory;
-import com.pancats.view.Login;
-import com.pancats.view.MainFrame;
+import com.pancats.view.login.Login;
+import com.pancats.view.main.MainFrame;
 
 public class LoginListener implements ActionListener{
 	private Login login=null;

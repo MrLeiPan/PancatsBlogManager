@@ -1,8 +1,5 @@
 package com.pancats.domain;
 
-import org.junit.Test;
-
-import com.pancats.util.BeanOrder;
 import com.pancats.util.BeanOrder.BeanOrders;
 
 public class User {

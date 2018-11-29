@@ -1,4 +1,4 @@
-package com.pancats.view;
+package com.pancats.view.main;
 
 import java.awt.CardLayout;
 import java.awt.Color;

@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import com.pancats.view.ContentPanel;
+import com.pancats.view.main.ContentPanel;
 
 public class WebsiteListener implements ActionListener {
 

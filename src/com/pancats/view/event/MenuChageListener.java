@@ -8,10 +8,10 @@ import java.util.List;
 
 import javax.swing.JButton;
 
-import com.pancats.view.ContentPanel;
 import com.pancats.view.components.BasicPopupMenu;
 import com.pancats.view.components.RButton;
 import com.pancats.view.components.SystemMenu;
+import com.pancats.view.main.ContentPanel;
 
 public class MenuChageListener implements ActionListener{
 	private CardLayout card=null;
